@@ -1,7 +1,8 @@
 {
-  "root": "public",
-  "clean_urls": true,
-  "routes": {
-    "/**": "avel-norte.html"
-  }
+  "rewrites": [
+    {
+      "source": "/avel-norte",
+      "destination": "/avel-norte.html"
+    }
+  ]
 }
