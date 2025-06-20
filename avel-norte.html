@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ável Norte | Seu Radar de Investimentos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Reset & Body Styles */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0f2f5; /* Light grey background */
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            overflow: hidden; /* Clear floats */
+        }
+
+        /* Header & Logo */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .main-title-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centraliza horizontalmente */
+            margin-bottom: 15px;
+        }
+        .logo-avel {
+            max-width: 60px; /* Tamanho ajustado para a logo ao lado do texto */
+            height: auto;
+            margin-right: 15px; /* Espaço entre a logo e o texto */
+            border-radius: 50%; /* Se a logo for circular, para manter a estética */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para destacar */
+        }
+        .main-title {
+            font-family: 'Lora', serif; /* More classic/sophisticated font */
+            font-size: 3.5em; /* Bigger title */
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.1;
+            font-weight: 700;
+        }
+        .subtitle {
+            font-size: 1.15em;
+            color: #777;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        .date {
+            text-align: center;
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 30px;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            font-weight: 500;
+        }
+
+        /* Section Titles */
+        h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.2em;
+            color: #34495e;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px; /* Thicker underline */
+            background-color: #2980b9;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        h3 {
+            font-size: 1.5em;
+            color: #2980b9;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-left: 5px solid #2980b9; /* Stronger border */
+            padding-left: 15px;
+            font-weight: 600;
+        }
+
+        /* News Item Styling - Card-like */
+        .news-item {
+            display: flex;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            margin-bottom: 30px;
+            overflow: hidden; /* Ensures border-radius applies to image */
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-img-wrapper {
+            flex: 0 0 250px; /* Fixed width for larger image */
+            height: 280px; /* Fixed height for consistency */
+            width: 50%;
+            overflow: hidden;
+        }
+        .news-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image covers the area */
+            display: block;
+        }
+        .news-content {
+            flex: 1;
+            padding: 25px; /* Internal padding for content */
+        }
+        .news-content p {
+            margin: 0 0 12px 0;
+            font-size: 1em;
+            color: #444;
+        }
+        .news-comment {
+            font-style: italic;
+            color: #555;
+            background-color: #e8f5fd; /* Lighter blue background */
+            padding: 15px 20px;
+            border-left: 6px solid #2196f3; /* Stronger blue border */
+            margin-top: 20px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            line-height: 1.5;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        /* List Styles */
+        .bullet-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+        .bullet-list li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+            color: #444;
+            font-weight: 500;
+        }
+        .bullet-list li:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px; /* Adjust vertical alignment */
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #2980b9;
+            box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+        }
+        .green-dot::before { background-color: #27ae60; } /* Green for positive */
+        .red-dot::before { background-color: #e74c3c; }   /* Red for caution */
+        .blue-dot::before { background-color: #3498db; }  /* Blue for info */
+
+        .highlight, .warning {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-right: 5px; /* Spacing between dot and text */
+        }
+        .highlight {
+            background-color: #d4edda; /* Light green for positive highlight */
+            color: #155724;
+        }
+        .warning {
+            background-color: #f8d7da; /* Light red for warning */
+            color: #721c24;
+        }
+
+        /* Call to Action */
+        .call-to-action {
+            background-image: linear-gradient(to right, #2980b9, #3498db);
+            color: #fff;
+            padding: 35px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 60px;
+            font-size: 1.25em;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        .call-to-action p {
+            margin: 0 0 20px 0;
+        }
+        .call-to-action a {
+            display: inline-block;
+            background-color: #2ecc71; /* Green button */
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        .call-to-action a:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px auto;
+                padding: 25px;
+            }
+            .main-title-wrapper {
+                flex-direction: column; /* Empilha logo e título em telas menores */
+            }
+            .logo-avel {
+                margin-right: 0;
+                margin-bottom: 15px; /* Espaço abaixo da logo */
+            }
+            .main-title {
+                font-size: 2.8em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            h3 {
+                font-size: 1.3em;
+            }
+            .news-item {
+                flex-direction: column; /* Stack image and content */
+            }
+            .news-img-wrapper {
+                flex: none; /* Remove fixed width */
+                width: 100%; /* Full width image */
+                height: 200px; /* Adjust height for mobile */
+            }
+            .news-content {
+                padding: 20px;
+            }
+            .bullet-list li {
+                padding-left: 30px;
+                font-size: 1em;
+            }
+            .bullet-list li:before {
+                top: 5px;
+            }
+            .call-to-action {
+                padding: 25px;
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="main-title-wrapper">
+                <!-- LOGO DA AVEL - SUBSTITUA O SRC PELA URL REAL DA SUA LOGO HOSPEDADA -->
+                <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEgeD9oqrRwMA/company-logo_200_200/company-logo_200_200/0/1710444334968/avelinvestimentos_logo?e=2147483647&v=beta&t=_wdkG_2l669uFVw7AUr4gvWE3s45Ar4I_jPnND1RrKo" alt="Logo Ável Investimentos" class="logo-avel">
+                <h1 class="main-title">Ável Norte</h1>
+            </div>
+            <p class="subtitle">Seu Radar de Investimentos: Análise Semanal & Oportunidades no Mercado Financeiro</p>
+        </div>
+
+        <div class="date">Edição: 20 de Junho de 2025 | Sexta é dia de revisar a carteira.</div>
+
+        <h2>🌎 Radar Semanal: Onde o Mercado Moveu</h2>
+
+        <div class="news-item">
+            <div class="news-img-wrapper">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB2MAqQypWWc35dGCMX15wz6DE43zIwnD2QQ&s" alt="Banco Central do Brasil e moedas.">
+            </div>
+            <div class="news-content">
+                <h3>🇧🇷 Selic vai a 15% – Copom surpreende.</h3>
+                <p>O Comitê de Política Monetária (Copom) do Banco Central do Brasil surpreendeu o mercado ao elevar a Taxa Selic para **15%**. A decisão reforça o compromisso em combater a inflação de forma mais agressiva.</p>
+                <p class="news-comment">**Nosso Comentário:** "Essa decisão é um divisor de águas para sua carteira! Com a Selic a 15%, a Renda Fixa se torna uma potência. Seus investimentos em CDI e inflação estão agora com um rendimento ainda mais robusto e previsível. Excelente para proteger e valorizar seu capital."</p>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-img-wrapper">
+                <img src="https://s2-valor.glbimg.com/q9-ygEVorFRnmWDc1BEQ-Tco3hw=/0x0:6000x4000/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2024/r/n/bBAiDOR4WJNP1Xmy3Biw/ap24234665278600.jpg" alt="Gráfico de mercado financeiro com símbolo do dólar.">
+            </div>
+            <div class="news-content">
+                <h3>🇺🇸 Fed mantém juros altos – só 1 corte em 2025.</h3>
+                <p>O Federal Reserve (Fed) dos EUA decidiu manter as taxas de juros em patamares elevados, indicando que a expectativa agora é de apenas um corte em 2025. Isso impacta diretamente o fluxo global de capital.</p>
+                <p class="news-comment">**Nosso Comentário:** "Cenário de dólar forte e cautela global reforçada. Para quem tem investimentos no exterior, isso pode ser vantajoso. Hora de olhar para a proteção cambial para seus ativos internacionais e as oportunidades em ETFs globais que se beneficiam de um dólar forte."</p>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-img-wrapper">
+                <img src="https://www.infomoney.com.br/wp-content/uploads/2022/08/GettyImages-183303963.jpg?fit=724%2C483&quality=50&strip=all" alt="Skyline de cidade asiática, simbolizando a China.">
+            </div>
+            <div class="news-content">
+                <h3>🇹🇼 China desacelera, mas varejo anima.</h3>
+                <p>Enquanto a economia chinesa mostra sinais de desaceleração geral, o setor de varejo surpreendeu positivamente, indicando uma resiliência no consumo interno.</p>
+                <p class="news-comment">**Nosso Comentário:** "É um dado misto que exige atenção. Empresas brasileiras com forte ligação comercial com a China devem ser observadas de perto. A vitalidade do varejo chinês pode ser um bom sinal para setores específicos e exportadores focados no consumidor final."</p>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-img-wrapper">
+                <img src="https://cdn.borainvestir.b3.com.br/2025/05/22143447/bitcoin-maxima-motivos.jpg.webp" alt="Símbolo do Bitcoin em um gráfico de alta.">
+            </div>
+            <div class="news-content">
+                <h3>📈 Bitcoin sobe p/ US$106k – reação ao Fed.</h3>
+                <p>O Bitcoin experimentou uma alta significativa, rompendo a marca de US$106 mil, em parte influenciado pela resposta dos mercados às decisões do Fed.</p>
+                <p class="news-comment">**Nosso Comentário:** "As criptomoedas mostram sua resiliência novamente! Se você tem apetite a risco, lembre-se: a regra é diversificar e alocar uma pequena parcela da carteira (menos de 5%). Priorize projetos com fundamentos sólidos e que permitam 'staking' para geração de renda passiva."</p>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-img-wrapper">
+                <img src="https://simec.com.br/media/img_noticias/tabelas-ipca-mobills.png" alt="Gráfico de inflação ou preços subindo.">
+            </div>
+            <div class="news-content">
+                <h3>📈 IPCA-15 controlado (+0,36%) – inflação firme.</h3>
+                <p>O IPCA-15 registrou alta de +0.36%, mostrando que a inflação está controlada, mas em um ritmo ainda persistente, reforçando a cautela do Banco Central.</p>
+                <p class="news-comment">**Nosso Comentário:** "É um bom sinal para a economia, mas a inflação ainda demanda atenção. Isso valida ainda mais a estratégia de ter parte da sua carteira protegida por ativos indexados à inflação (IPCA), garantindo seu poder de compra no longo prazo."</p>
+            </div>
+        </div>
+
+        <h2>📌 Impactos na Sua Carteira: O Que Você Precisa Saber</h2>
+        <ul class="bullet-list">
+            <li><span class="blue-dot"></span> **Renda Fixa:** CDI alto = ótimo p/ LCIs/LCAs.
+                <p class="news-comment">"Com a Selic a 15%, a Renda Fixa se destaca como nunca! LCIs e LCAs isentas de IR são verdadeiros refúgios de rentabilidade e segurança para seus objetivos de curto e médio prazo. Não perca essa oportunidade!"</p>
+            </li>
+            <li><span class="blue-dot"></span> **Ações BR:** tech e varejo pressionados.
+                <p class="news-comment">"Juros elevados afetam o poder de compra e o crédito, impactando setores como tecnologia e varejo. Seja seletivo nas Ações Brasileiras. Priorize empresas com balanços sólidos, baixa dívida e capacidade de adaptação em cenários desafiadores."</p>
+            </li>
+            <li><span class="blue-dot"></span> **Exterior:** dólar forte favorece ETFs globais.
+                <p class="news-comment">"A força do dólar é uma vantagem para quem investe lá fora. ETFs globais e BDRs que acompanham índices estrangeiros podem ser uma excelente forma de diversificar e se beneficiar do cenário atual."</p>
+            </li>
+            <li><span class="blue-dot"></span> **Cripto:** use <5% da carteira, foco em projetos com fluxo (ex: staking).
+                <p class="news-comment">"Cripto é um universo de alto risco e alta recompensa. Se você busca exposição, mantenha a alocação em menos de 5% da carteira e foque em projetos com utilidade real e que ofereçam mecanismos de rendimento como 'staking'."</p>
+            </li>
+        </ul>
+
+        <h2>⚠ Cuidado com: Mantenha-se Alerta!</h2>
+        <ul class="bullet-list">
+            <li><span class="red-dot"></span> <span class="warning">Prefixados longos (>5 anos).</span>
+                <p class="news-comment">"Em um cenário de juros volátil e potencialmente crescente, ficar 'preso' em prefixados muito longos pode te fazer perder oportunidades. Prefira prazos mais curtos ou indexados à inflação/CDI, que oferecem maior flexibilidade e proteção."</p>
+            </li>
+            <li><span class="red-dot"></span> <span class="warning">Small caps consumo.</span>
+                <p class="news-comment">"Empresas de menor capitalização no setor de consumo são mais vulneráveis a flutuações econômicas e juros altos, que afetam diretamente o poder de compra. Seja cauteloso e avalie bem os fundamentos antes de investir."</p>
+            </li>
+            <li><span class="red-dot"></span> <span class="warning">Cripto sem hedge cambial.</span>
+                <p class="news-comment">"Investir em criptos sem proteção cambial (hedge) te expõe duplamente: à volatilidade do próprio ativo e à do dólar. Avalie a necessidade de estratégias de proteção para reduzir riscos e proteger seu capital."</p>
+            </li>
+        </ul>
+
+        <h2>📅 Recomendações de Alocação: Onde Colocar seu Dinheiro AGORA</h2>
+        <ul class="bullet-list">
+            <li><span class="green-dot"></span> <span class="highlight">LCI isenta 96% CDI (curto-médio prazo).</span>
+                <p class="news-comment">"Simples, segura e rentável. Perfeita para quem busca um investimento com excelente liquidez e isenção de IR, aproveitando os juros altos do CDI. Uma escolha inteligente para sua reserva de emergência ou objetivos de curto/médio prazo."</p>
+            </li>
+            <li><span class="green-dot"></span> <span class="highlight">CRI/CRA PetroRecôncavo isenta com cupom 12,9%.</span>
+                <p class="news-comment">"Um papel de crédito privado de uma empresa sólida no setor de energia, com retorno muito atrativo e, o melhor, isento de Imposto de Renda. Uma ótima opção para diversificar sua renda fixa e buscar rentabilidade acima da média."</p>
+            </li>
+            <li><span class="green-dot"></span> <span class="highlight">BTC abaixo do topo = entrada parcial.</span>
+                <p class="news-comment">"Para os investidores com maior apetite a risco: se o Bitcoin estiver abaixo do seu pico histórico, avalie uma entrada gradual e parcelada. É uma estratégia de acumulação, mas lembre-se sempre do gerenciamento de risco e de alocar uma porcentagem pequena da carteira."</p>
+            </li>
+        </ul>
+
+        <h2>🔮 Na Próxima Semana: Fique Ligado!</h2>
+        <ul class="bullet-list">
+            <li><span class="blue-dot"></span> **Quinta (27/6):** **IPCA-15** e **Ata Copom**. Teremos mais dados sobre a inflação no meio do mês e detalhes sobre o "tom" e as projeções do Banco Central do Brasil.
+            </li>
+            <li><span class="blue-dot"></span> **Sexta (28/6):** Dados de **Inflação dos EUA**. Crucial para entender os próximos passos do Federal Reserve e o impacto nos mercados globais.
+            </li>
+            <li><span class="blue-dot"></span> **Domingo (29/6):** **Fechamento do trimestre cripto**. O encerramento do trimestre pode trazer movimentos importantes e novas narrativas para o mercado de criptomoedas.
+            </li>
+        </ul>
+
+        <div class="call-to-action">
+            <p>**Preocupado com o cenário de uma possível guerra e se sua carteira está vulnerável?**</p>
+            <p>Em tempos de incerteza global, **identificar e mitigar riscos é fundamental.** Estamos dedicados a ajudar investidores a analisar vulnerabilidades em seus portfólios e apresentar estratégias personalizadas, incluindo simulações de carteiras para comparação.</p>
+            <p>Se você quer saber se sua carteira está preparada para os desafios atuais ou deseja comparar suas estratégias com as nossas, **<a href="https://wa.me/5593991306252?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20a%20minha%20carteira%20e%20o%20cen%C3%A1rio%20atual%20(incluindo%20riscos%20geopol%C3%ADticos)." target="_blank">me chame no WhatsApp</a>** e vamos agendar uma conversa. 🫡</p>
+        </div>
+    </div>
+</body>
+</html>
